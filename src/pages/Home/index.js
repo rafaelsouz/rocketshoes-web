@@ -10,7 +10,7 @@ import * as CartActions from '../../store/modules/cart/actions';
 import api from '../../services/api';
 import { ProductList } from './styles';
 
-function Home({ addToCart, amount }) {
+function Home({ addToCartRequest, amount }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -24,8 +24,8 @@ function Home({ addToCart, amount }) {
     });
   }, []);
 
-  async function handleAddProduct(product) {
-    addToCart(product);
+  async function handleAddProduct(id) {
+    addToCartRequest(id);
   }
 
   return (
@@ -36,7 +36,7 @@ function Home({ addToCart, amount }) {
           <strong>{product.title}</strong>
           <span>{product.priceFormatted}</span>
 
-          <button type="button" onClick={() => handleAddProduct(product)}>
+          <button type="button" onClick={() => handleAddProduct(product.id)}>
             <div>
               <MdShoppingCart size={16} color="#fff" />
               {amount[product.id] || 0}
